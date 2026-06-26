@@ -1016,4 +1016,39 @@ document.addEventListener('DOMContentLoaded', () => {
   updateClock();
   setInterval(updateClock, 1000);
 
+  // --- Security Protection (Disable Right-click & DevTools) ---
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    showToast('Protected', 'Right-click menu is disabled.', 'warning');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    // Disable F12
+    if (e.key === 'F12') {
+      e.preventDefault();
+      showToast('Protected', 'Developer Tools are disabled on this site.', 'warning');
+    }
+    // Disable Ctrl+U (View Source)
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+      e.preventDefault();
+      showToast('Protected', 'Source code viewing is disabled.', 'warning');
+    }
+    // Disable Ctrl+S (Save Page)
+    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+      showToast('Protected', 'Page saving is disabled.', 'warning');
+    }
+    // Disable Ctrl+Shift+I, J, C (DevTools console/inspect)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+      e.preventDefault();
+      showToast('Protected', 'Developer Tools are disabled on this site.', 'warning');
+    }
+  });
+
+  // Disable dragging on all images to protect profile photo
+  document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+
 });

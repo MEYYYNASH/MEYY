@@ -676,3 +676,23 @@ textarea.input-field { resize: vertical; min-height: 88px; }
   backdrop-filter: blur(24px) saturate(190%);
   -webkit-backdrop-filter: blur(24px) saturate(190%);
 }
+
+/* WEBSITE SECURITY PROTECTION */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+input, textarea, pre, code {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+img {
+  -webkit-touch-callout: none;
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
