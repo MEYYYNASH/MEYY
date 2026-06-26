@@ -772,18 +772,27 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Email Copied', 'pichpenhbormey383@gmail.com copied!', 'success');
   });
   safeOn('list-print-cv', () => {
-    showToast('No File Uploaded', 'CV not yet uploaded by the owner.', 'warning');
+    showToast('Demo Mode', 'CV printing is disabled in the GitHub Pages demo.', 'warning');
   });
   safeOn('list-download-cv', () => {
-    showToast('No File Uploaded', 'CV not yet uploaded by the owner.', 'warning');
+    showToast('Demo Mode', 'CV download is disabled in the GitHub Pages demo.', 'warning');
   });
   // Resume toolbar buttons
   safeOn('cv-download-btn', () => {
-    showToast('No File Uploaded', 'CV not yet uploaded by the owner.', 'warning');
+    showToast('Demo Mode', 'CV download is disabled in the GitHub Pages demo.', 'warning');
   });
   safeOn('cv-print-btn', () => {
-    showToast('No File Uploaded', 'CV not yet uploaded by the owner.', 'warning');
+    showToast('Demo Mode', 'CV printing is disabled in the GitHub Pages demo.', 'warning');
   });
+
+  // Contact form demo notice
+  const contactForm = document.getElementById('contact-form-new');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Demo Mode', 'Message sending is disabled in the GitHub Pages demo.', 'warning');
+    });
+  }
 
   // --- Minimize dock action with spring-physics CSS class animation ---
   const minimizeBtn = document.getElementById('dock-minimize-btn');
