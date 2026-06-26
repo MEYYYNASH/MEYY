@@ -414,6 +414,7 @@ textarea.input-field { resize: vertical; min-height: 88px; }
 .notif-item:last-child { border-bottom: none; }
 .notif-item:hover { background: var(--accent-soft); }
 .notif-item-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-primary); margin-top: 4px; flex-shrink: 0; }
+.notif-item-dot.warning { background: #f59e0b; }
 .notif-item-title { font-size: 0.73rem; font-weight: 600; color: var(--text-primary); display: block; margin-bottom: 2px; }
 .notif-item-desc { font-size: 0.63rem; color: var(--text-tertiary); line-height: 1.4; }
 

@@ -977,8 +977,11 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(loadInterval);
       setTimeout(() => {
         loaderScreen.classList.add('hidden');
-        showToast('Spatial Workspace Active', 'visionOS 2.0 system initialized.', 'success');
+        showToast('Portfolio Active', 'Responsive mobile and PC layout initialized.', 'success');
         showToast('Online Status', 'Bormey is active in Phnom Penh', 'info');
+        setTimeout(() => {
+          showToast('Demo Notice', 'Some functions (e.g. CV Download/Print, form submission) may not fully work on GitHub Pages.', 'warning');
+        }, 1200);
       }, 500);
     }
     loaderProgress.textContent = `${progress}%`;
