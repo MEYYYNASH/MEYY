@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeyTool - All-in-One Web Tools Hub</title>
+    <!-- Stylesheet & PWA Manifest -->
+    <link rel="stylesheet" href="style.css?v=1.2">
+    <link rel="manifest" href="./manifest.json">
+    <!-- PWA Mobile Theme Color & Apple support -->
+    <meta name="theme-color" content="#06060c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External Libraries (CDNs) -->
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- Advanced File, OCR and Archive Libraries -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/tesseract.js@4.0.1/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="logo-text"><i class="fa-solid fa-bolt" style="margin-right: 6px; color: var(--accent-primary);"></i>MeyTool</div>
+        <button class="menu-toggle-btn" id="mobile-menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="app-container">
+
+        <!-- Sidebar / Mobile Drawer -->
+        <aside class="sidebar" id="app-sidebar">
+
+            <!-- Desktop only: logo header -->
+            <div class="logo-section">
+                <span class="logo-icon"><i class="fa-solid fa-bolt" style="color: var(--accent-primary);"></i></span>
+                <span class="logo-text">MeyTool</span>
+            </div>
+
+            <!-- Mobile Drawer Header (no MeyTool title — just icon + close) -->
+            <div class="drawer-header">
+                <div class="drawer-header-logo">
+                    <i class="fa-solid fa-bolt" style="color: var(--accent-primary);"></i>
+                </div>
+                <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Profile Row -->
+            <div class="drawer-profile" id="mob-profile-trigger" style="cursor: pointer;">
+                <div class="dp-avatar">D</div>
+                <div class="dp-info">
+                    <span class="dp-name">Developer User</span>
+                    <span class="dp-sub" data-translate="demo_mode">Demo Mode</span>
+                    <a href="#" class="dp-auth-link" id="mob-auth-btn" data-translate="btn_login">Sign In</a>
+                </div>
+            </div>
+
+            <!-- Section: Search -->
+            <div class="drawer-section-title">SEARCH</div>
+            <div class="drawer-search-wrap">
+                <i class="fa-solid fa-magnifying-glass drawer-search-icon"></i>
+                <input type="text" class="drawer-search-input" id="sidebar-search-input" placeholder="Search tools...">
+            </div>
+
+            <!-- Section: Navigate -->
+            <div class="drawer-section-title">NAVIGATE</div>
+            <nav class="category-nav drawer-menu">
+                <div class="nav-item drawer-item active" data-category="dashboard">
+                    <span class="di-icon di-pink"><i class="fa-solid fa-house"></i></span>
+                    <span class="di-label" data-translate="nav_dashboard">Dashboard</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="finance">
+                    <span class="di-icon di-amber"><i class="fa-solid fa-calculator"></i></span>
+                    <span class="di-label" data-translate="nav_finance">Accounting & Finance</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="text">
+                    <span class="di-icon di-blue"><i class="fa-solid fa-file-lines"></i></span>
+                    <span class="di-label" data-translate="nav_text">Text Tools</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="file">
+                    <span class="di-icon di-blue"><i class="fa-solid fa-folder-open"></i></span>
+                    <span class="di-label" data-translate="nav_file">File Tools</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="adv-file">
+                    <span class="di-icon di-rose"><i class="fa-solid fa-file-shield"></i></span>
+                    <span class="di-label" data-translate="nav_adv_file">Advanced Files</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="encode">
+                    <span class="di-icon di-purple"><i class="fa-solid fa-key"></i></span>
+                    <span class="di-label" data-translate="nav_encode">Encode / Decode</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="image">
+                    <span class="di-icon di-emerald"><i class="fa-solid fa-image"></i></span>
+                    <span class="di-label" data-translate="nav_image">Image Tools</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="developer">
+                    <span class="di-icon di-cyan"><i class="fa-solid fa-code"></i></span>
+                    <span class="di-label" data-translate="nav_dev">Developer Tools</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="utilities">
+                    <span class="di-icon di-rose"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                    <span class="di-label" data-translate="nav_util">Utilities</span>
+                    <span class="di-arrow">›</span>
+                </div>
+                <div class="nav-item drawer-item" data-category="creator">
+                    <span class="di-icon di-violet"><i class="fa-solid fa-palette"></i></span>
+                    <span class="di-label" data-translate="nav_creator">Creator Tools</span>
+                    <span class="di-arrow">›</span>
+                </div>
+            </nav>
+
+            <!-- Section: Settings -->
+            <div class="drawer-section-title">SETTINGS</div>
+            <div class="drawer-menu">
+                <!-- Language toggle -->
+                <button class="drawer-item" id="mob-lang-btn">
+                    <span class="di-icon di-blue"><i class="fa-solid fa-globe"></i></span>
+                    <span class="di-label">Language</span>
+                    <span class="di-badge" id="mob-lang-badge">EN</span>
+                </button>
+                <!-- Theme toggle button -->
+                <button class="drawer-item" id="mob-theme-btn">
+                    <span class="di-icon di-pink"><i class="fa-solid fa-circle-half-stroke"></i></span>
+                    <span class="di-label">Theme</span>
+                    <span class="di-badge" id="mob-theme-badge">Cyberpunk</span>
+                </button>
+                <!-- Collapsible theme options wrapper -->
+                <div class="drawer-submenu" id="mob-theme-submenu">
+                    <button class="drawer-item" data-theme="cyberpunk" id="mob-theme-cyber">
+                        <span class="di-icon di-pink"><i class="fa-solid fa-bolt"></i></span>
+                        <span class="di-label">Cyberpunk</span>
+                        <span class="di-arrow">›</span>
+                    </button>
+                    <button class="drawer-item" data-theme="dark" id="mob-theme-dark">
+                        <span class="di-icon di-purple"><i class="fa-solid fa-moon"></i></span>
+                        <span class="di-label">Dark Glass</span>
+                        <span class="di-arrow">›</span>
+                    </button>
+                    <button class="drawer-item" data-theme="light" id="mob-theme-light">
+                        <span class="di-icon di-amber"><i class="fa-solid fa-sun"></i></span>
+                        <span class="di-label">Light Glass</span>
+                        <span class="di-arrow">›</span>
+                    </button>
+                </div>
+                <!-- Download PWA button -->
+                <button class="drawer-item" id="mob-install-btn" style="display: none;">
+                    <span class="di-icon di-emerald"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    <span class="di-label">Download App</span>
+                    <span class="di-badge" style="background: var(--accent-secondary); color: #000; font-weight: 800; font-size: 9px; padding: 2px 6px;">APP</span>
+                </button>
+            </div>
+
+            <!-- Profile footer (desktop) -->
+            <div class="profile-section">
+                <div class="user-info" id="user-profile-trigger">
+                    <div class="avatar">D</div>
+                    <div class="user-details">
+                        <span class="user-name">Developer User</span>
+                        <span class="user-status" data-translate="demo_mode">Demo Mode</span>
+                    </div>
+                </div>
+                <button class="auth-btn" id="sidebar-auth-btn" data-translate="btn_login">Sign In</button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" id="global-search-input" placeholder="Search tools (e.g. Base64, QR)...">
+                </div>
+
+                <div class="top-bar-actions">
+                    <!-- Language Switcher -->
+                    <button class="action-btn" id="lang-toggle-btn" title="Toggle Language">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="badge" id="lang-badge" style="font-size: 8px; background: var(--accent-secondary); color: #000; font-weight: 800;">EN</span>
+                    </button>
+
+                    <!-- History Button -->
+                    <button class="action-btn" id="history-toggle-btn" title="Recent Activity">
+                        <i class="fa-solid fa-history"></i>
+                        <span class="badge" id="history-badge">0</span>
+                    </button>
+
+                    <!-- Theme Toggle Button -->
+                    <button class="action-btn" id="theme-toggle-btn" title="Change Theme">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                    </button>
+                </div>
+
+                <!-- Theme Selection Dropdown -->
+                <div class="theme-menu" id="theme-menu-dropdown">
+                    <div class="theme-option active" data-theme="cyberpunk">
+                        <i class="fa-solid fa-bolt"></i> Cyberpunk
+                    </div>
+                    <div class="theme-option" data-theme="dark">
+                        <i class="fa-solid fa-moon"></i> Dark Glass
+                    </div>
+                    <div class="theme-option" data-theme="light">
+                        <i class="fa-solid fa-sun"></i> Light Glass
+                    </div>
+                </div>
+
+                <!-- History Dropdown -->
+                <div class="history-dropdown" id="history-dropdown-panel">
+                    <div class="dropdown-header">
+                        <span data-translate="recent_activity">Recent Activity</span>
+                        <span class="clear-btn" id="clear-history-btn" data-translate="clear_all">Clear All</span>
+                    </div>
+                    <div class="history-list" id="history-items-container">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </header>
+
+            <!-- Inner view workspace -->
+            <div class="view-workspace" id="main-workspace">
+                
+                <!-- Workspace Tabs Navigation -->
+                <div class="workspace-tabs-container" id="workspace-tabs-bar" style="display: none;">
+                    <button class="tab-btn active" id="tab-dashboard" data-tab-id="dashboard">
+                        <i class="fa-solid fa-house"></i> Dashboard
+                    </button>
+                    <!-- Tabs will be dynamically created here -->
+                </div>
+
+                <!-- PANEL 1: DASHBOARD (Home Page) -->
+                <div class="dashboard-panel" id="panel-dashboard">
+                    <!-- Feature Preview Notification Card -->
+                    <div class="preview-card" id="preview-notification-card">
+                        <button class="preview-card-close" id="close-preview-card" aria-label="Dismiss preview notification">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <div class="preview-card-header">
+                            <div class="preview-card-title-group">
+                                <span class="preview-card-icon">⚡</span>
+                                <span class="preview-card-title" data-translate="preview_title">Feature Preview</span>
+                            </div>
+                        </div>
+                        <p class="preview-card-body" data-translate="preview_desc">
+                            You are using a preview version of this tool. Some features may change during development.
+                        </p>
+                        <button class="app-btn primary" id="dashboard-install-btn" data-translate="btn_install_app" style="margin: 4px 0 8px; width: fit-content; gap: 8px; font-weight: 700; border-radius: 20px;">
+                            <i class="fa-solid fa-mobile-screen-button"></i> Install MeyTool App
+                        </button>
+                        <div class="preview-card-footer">
+                            <div class="preview-badge-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span data-translate="preview_safe">Safe to use</span>
+                            </div>
+                            <span class="preview-badge-sep">•</span>
+                            <div class="preview-badge-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span data-translate="preview_browser">Works in browser</span>
+                            </div>
+                            <span class="preview-badge-sep">•</span>
+                            <div class="preview-badge-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span data-translate="preview_local">Runs locally</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-hero">
+                        <h1 class="hero-title" data-translate="hero_title">Welcome to <span>MeyTool</span></h1>
+                        <p class="hero-desc" data-translate="hero_desc">
+                            An ultra-modern, glassmorphic suite of essential developer utilities, text transformers, converters, and creators. All operations run instantly inside your browser without sending your data to any server.
+                        </p>
+
+                        <!-- Auto Tool Detector -->
+                        <div class="detector-container">
+                            <h3 style="font-size: 14px; font-weight: 700; color: var(--accent-secondary);" data-translate="det_title"><i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 6px;"></i>Auto-Tool Input Detector</h3>
+                            <div class="detector-input-wrapper">
+                                <textarea class="detector-textarea" id="detector-input" placeholder="Paste JSON, Base64 text, Hex color, URL or drag-and-drop a file here..."></textarea>
+                            </div>
+                            
+                            <!-- File Drop Container inside Detector -->
+                            <div class="file-drop-area" id="detector-drop-zone">
+                                <i class="fa-solid fa-cloud-arrow-up uploader-icon"></i>
+                                <div class="uploader-text" data-translate="det_drop_hint">Or drag & drop files here</div>
+                                <div class="uploader-hint" data-translate="det_drop_formats">Supports PDF, TXT, JSON, CSV, JPG, PNG, WEBP</div>
+                                <input type="file" id="detector-file-input" style="display: none;">
+                            </div>
+
+                            <div class="detector-footer">
+                                <span class="detector-result-badge" id="detector-badge"></span>
+                                <div class="detector-actions">
+                                    <button class="det-btn" id="detector-clear-btn" data-translate="btn_clear">Clear</button>
+                                    <button class="det-btn primary" id="detector-run-btn" data-translate="btn_detect">Detect & Open</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Summary -->
+                    <div class="stats-summary">
+                        <div class="stats-card">
+                            <div class="stats-icon"><i class="fa-solid fa-cubes"></i></div>
+                            <div class="stats-info">
+                                <span class="stats-val" id="stats-total-tools">25+</span>
+                                <span class="stats-lbl" data-translate="stats_total">Tools Available</span>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-icon"><i class="fa-solid fa-star"></i></div>
+                            <div class="stats-info">
+                                <span class="stats-val" id="stats-favorite-count">0</span>
+                                <span class="stats-lbl" data-translate="stats_fav">Favorite Tools</span>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                            <div class="stats-info">
+                                <span class="stats-val" id="stats-session-runs">0</span>
+                                <span class="stats-lbl" data-translate="stats_runs">Tools Executed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools Directory Grids (Grouped by category) -->
+                    <div id="dashboard-tools-container">
+                        <!-- Loaded Dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- PANEL 2: ACTIVE TOOL WORKSPACE FRAME -->
+                <div class="tool-workspace-panel" id="panel-tool-workspace">
+                    <div class="tool-workspace-header">
+                        <div class="tool-title-group">
+                            <span class="tool-title-icon" id="active-tool-icon"></span>
+                            <h2 class="tool-title-text" id="active-tool-title">Tool Title</h2>
+                            <span class="tool-tag" id="active-tool-category">Text</span>
+                        </div>
+                        <div class="tool-title-actions">
+                            <button class="action-btn" id="active-tool-fav-btn" title="Add to Favorites">
+                                <i class="fa-regular fa-star"></i>
+                            </button>
+                            <button class="action-btn" id="active-tool-close-btn" title="Close Workspace">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-body-container" id="active-tool-body">
+                        <!-- Dynamically filled with specific tool inputs/outputs -->
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+    <div class="custom-modal" id="custom-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-icon"><i class="fa-solid fa-circle-exclamation" style="color: var(--accent-primary);"></i></div>
+            <h3 class="modal-title" data-translate="modal_beta_title">BETA & DEMO ACCESS</h3>
+            <p class="modal-message" data-translate="modal_beta_desc">
+                Thank you for your interest! The developer has not initialized the server-side authentication database yet. Sign-in and account sync are disabled in this build.
+            </p>
+            <button class="app-btn primary" id="modal-close-btn" style="align-self: center;" data-translate="btn_close">Close</button>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notifications -->
+    <div class="toast-container" id="toast-notification-container"></div>
+
+    <!-- App Logic Script -->
+    <script src="tools.js?v=1.2"></script>
+    <script src="finance_tools.js?v=1.2"></script>
+    <script src="file_tools.js?v=1.2"></script>
+    <script src="app.js?v=1.2"></script>
+</body>
+</html>
