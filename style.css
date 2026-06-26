@@ -188,8 +188,8 @@ input,textarea { font-family: inherit; outline: none; }
   border-radius: var(--radius-xl); padding: 22px 18px 18px; color: white;
   margin-bottom: 14px; box-shadow: var(--shadow-xl), 0 0 40px rgba(26,35,126,0.3);
 }
-.profile-hero-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.06); }
-.profile-hero-card::after  { content: ''; position: absolute; bottom: -30px; left: 20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+.profile-hero-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.06); pointer-events: none; }
+.profile-hero-card::after  { content: ''; position: absolute; bottom: -30px; left: 20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none; }
 .profile-hero-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; position: relative; z-index: 1; }
 .profile-hero-avatar { width: 64px; height: 64px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.35); overflow: hidden; flex-shrink: 0; }
 .profile-hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -285,7 +285,7 @@ input,textarea { font-family: inherit; outline: none; }
 
 /* ABOUT PANEL */
 .about-profile-card { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); border-radius: var(--radius-xl); padding: 22px 18px; color: white; margin-bottom: 14px; display: flex; gap: 16px; align-items: center; box-shadow: var(--shadow-xl), 0 0 40px rgba(26,35,126,0.25); }
-.about-profile-card::before { content: ''; position: absolute; top: -30px; right: -30px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.07); }
+.about-profile-card::before { content: ''; position: absolute; top: -30px; right: -30px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
 .about-avatar-wrap { position: relative; flex-shrink: 0; }
 .about-avatar-img { width: 78px; height: 78px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); object-fit: cover; position: relative; z-index: 1; }
 .about-avatar-ring-spin { position: absolute; inset: -4px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(255,255,255,0.5), transparent, rgba(79,195,247,0.6), transparent); animation: avatarRingSpin 4s linear infinite; z-index: 0; }
@@ -366,7 +366,7 @@ input,textarea { font-family: inherit; outline: none; }
 
 /* CONTACT */
 .contact-avail-card { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); border-radius: var(--radius-xl); padding: 20px; color: white; margin-bottom: 14px; box-shadow: var(--shadow-xl), 0 0 30px rgba(26,35,126,0.25); }
-.contact-avail-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+.contact-avail-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.06); pointer-events: none; }
 .contact-avail-dot-row { display: flex; align-items: center; gap: 6px; font-size: 0.66rem; color: rgba(255,255,255,0.8); font-weight: 600; margin-bottom: 8px; }
 .contact-avail-heading { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: white; letter-spacing: -0.01em; margin-bottom: 4px; }
 .contact-avail-sub { font-size: 0.70rem; color: rgba(255,255,255,0.7); }
@@ -384,7 +384,7 @@ textarea.input-field { resize: vertical; min-height: 88px; }
 
 /* RESUME */
 .resume-download-card { background: linear-gradient(135deg, #0F172A 0%, var(--accent-primary) 100%); border-radius: var(--radius-xl); padding: 20px; color: white; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-xl); overflow: hidden; position: relative; }
-.resume-download-card::before { content: '📄'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 4rem; opacity: 0.12; }
+.resume-download-card::before { content: '📄'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 4rem; opacity: 0.12; pointer-events: none; }
 .resume-dl-title { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
 .resume-dl-sub { font-size: 0.68rem; color: rgba(255,255,255,0.7); }
 .resume-dl-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 12px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; font-size: 0.70rem; font-weight: 700; cursor: pointer; transition: all 0.2s; flex-shrink: 0; white-space: nowrap; }
