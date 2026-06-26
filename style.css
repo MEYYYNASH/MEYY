@@ -37,6 +37,7 @@
   --bottomnav-h: 72px;
   --card-padding: 20px;
   --spring: cubic-bezier(0.16,1,0.3,1);
+  --bg-island: rgba(255, 255, 255, 0.88);
 }
 
 [data-theme="dark"] {
@@ -59,6 +60,7 @@
   --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
   --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
   --shadow-xl: 0 16px 60px rgba(0,0,0,0.6);
+  --bg-island: rgba(26, 32, 53, 0.85);
 }
 
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
@@ -145,18 +147,31 @@ input,textarea { font-family: inherit; outline: none; }
 .viewport { flex: 1; overflow: hidden; position: relative; }
 .viewport-panel {
   position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden;
-  padding: 16px 16px 24px; opacity: 0; pointer-events: none;
+  padding: 16px 16px 100px; opacity: 0; pointer-events: none;
   transform: translateY(14px); transition: opacity 0.32s var(--spring), transform 0.32s var(--spring);
   scrollbar-width: none; -ms-overflow-style: none;
 }
 .viewport-panel::-webkit-scrollbar { display: none; }
 .viewport-panel.active { opacity: 1; pointer-events: all; transform: translateY(0); }
 
-/* BOTTOM NAV */
+/* BOTTOM NAV (Island Menu on mobile) */
 .bottom-nav {
-  position: relative; z-index: 10; height: var(--bottomnav-h);
-  background: var(--bg-card); border-top: 1px solid var(--border-soft);
-  display: flex; align-items: center; justify-content: space-around; padding: 0 8px; flex-shrink: 0;
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  height: 66px;
+  border-radius: 28px;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-island);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  box-shadow: 0 8px 32px rgba(26, 35, 126, 0.12), var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  z-index: 100;
 }
 .bottom-nav-btn {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -481,14 +496,22 @@ textarea.input-field { resize: vertical; min-height: 88px; }
   
   .bottom-nav {
     grid-area: sidebar;
+    position: static;
+    bottom: auto;
+    left: auto;
+    right: auto;
     height: 100%;
     flex-direction: column;
     justify-content: flex-start;
     padding: 24px 16px;
     gap: 8px;
-    border-top: none;
+    border-radius: 0;
+    border: none;
     border-right: 1px solid var(--border-soft);
     background: var(--bg-card);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   
   .bottom-nav-btn {
